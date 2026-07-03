@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Update Student</h2>
+
+    <form action="/students/update" method="post">
+
+        <label>Student ID</label><br>
+        <input type="number" name="studentId" required><br><br>
+
+        <label>First Name</label><br>
+        <input type="text" name="firstName" required><br><br>
+
+        <label>Last Name</label><br>
+        <input type="text" name="lastName" required><br><br>
+
+        <label>Email</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <button type="submit">Update Student</button>
+
+    </form>
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+
+</div>
+
+</body>
+</html>
