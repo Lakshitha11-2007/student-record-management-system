@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #38b2ac;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c53030;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #38b2ac;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Marks Records</h1>
+
+<table id="marksTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student ID</th>
+            <th>Subject</th>
+            <th>Marks Obtained</th>
+            <th>Total Marks</th>
+            <th>Exam Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows inserted here -->
+    </tbody>
+</table>
+
+<a href="/marks">Add New Marks</a>
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+<script>
+    function loadMarks() {
+        fetch("/api/marks/all")
+            .then(response => response.json())
+            .then(data => {
+                let tbody = document.querySelector("#marksTable tbody");
+                tbody.innerHTML = "";
+                data.forEach(record => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${record.id}</td>
+                        <td>${record.studentId}</td>
+                        <td>${record.subject}</td>
+                        <td>${record.marksObtained}</td>
+                        <td>${record.totalMarks}</td>
+                        <td>${record.examType}</td>
+                        <td><button class="delete-btn" onclick="deleteRecord(${record.id})">Delete</button></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error("Error fetching marks:", error));
+    }
+
+    function deleteRecord(id) {
+        if (!confirm("Are you sure you want to delete this record?")) {
+            return;
+        }
+        fetch(`/api/marks/delete/${id}`, {
+            method: "DELETE"
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Deleted successfully");
+                loadMarks();
+            } else {
+                alert("Failed to delete");
+            }
+        })
+        .catch(error => alert("Error: " + error));
+    }
+
+    loadMarks();
+</script>
+
+</body>
+</html>

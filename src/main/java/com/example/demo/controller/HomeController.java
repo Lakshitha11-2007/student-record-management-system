@@ -46,6 +46,16 @@ public class HomeController {
         return "view-attendance";
     }
 
+    @GetMapping("/marks")
+    public String marks() {
+        return "marks";
+    }
+
+    @GetMapping("/view-marks")
+    public String viewMarks() {
+        return "view-marks";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         return "redirect:/";
