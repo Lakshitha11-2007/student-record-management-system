@@ -24,6 +24,17 @@
             background-color: #2196F3;
             color: white;
         }
+        .delete-btn {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c53030;
+        }
         a {
             display: inline-block;
             margin-top: 20px;
@@ -43,10 +54,11 @@
             <th>Student ID</th>
             <th>Date</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Rows will be inserted here -->
+        <!-- Rows inserted here -->
     </tbody>
 </table>
 
@@ -55,24 +67,46 @@
 <a href="/dashboard">Back to Dashboard</a>
 
 <script>
-    fetch("/api/attendance/all")
-        .then(response => response.json())
-        .then(data => {
-            let tbody = document.querySelector("#attendanceTable tbody");
-            data.forEach(record => {
-                let row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${record.id}</td>
-                    <td>${record.studentId}</td>
-                    <td>${record.attendanceDate}</td>
-                    <td>${record.status}</td>
-                `;
-                tbody.appendChild(row);
-            });
+    function loadAttendance() {
+        fetch("/api/attendance/all")
+            .then(response => response.json())
+            .then(data => {
+                let tbody = document.querySelector("#attendanceTable tbody");
+                tbody.innerHTML = "";
+                data.forEach(record => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${record.id}</td>
+                        <td>${record.studentId}</td>
+                        <td>${record.attendanceDate}</td>
+                        <td>${record.status}</td>
+                        <td><button class="delete-btn" onclick="deleteRecord(${record.id})">Delete</button></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error("Error fetching attendance:", error));
+    }
+
+    function deleteRecord(id) {
+        if (!confirm("Are you sure you want to delete this record?")) {
+            return;
+        }
+        fetch(`/api/attendance/delete/${id}`, {
+            method: "DELETE"
         })
-        .catch(error => {
-            console.error("Error fetching attendance:", error);
-        });
+        .then(response => {
+            if (response.ok) {
+                alert("Deleted successfully");
+                loadAttendance();
+            } else {
+                alert("Failed to delete");
+            }
+        })
+        .catch(error => alert("Error: " + error));
+    }
+
+    loadAttendance();
 </script>
 
 </body>

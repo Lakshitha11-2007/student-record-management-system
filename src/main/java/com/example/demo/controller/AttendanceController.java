@@ -28,4 +28,10 @@ public class AttendanceController {
     public List<Attendance> getByStudentId(@PathVariable Long studentId) {
         return attendanceService.getAttendanceByStudentId(studentId);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteAttendance(@PathVariable Long id) {
+        attendanceService.deleteAttendance(id);
+        return "Deleted successfully";
+    }
 }

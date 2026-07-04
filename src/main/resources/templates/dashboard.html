@@ -1,55 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Dashboard - Student Record Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="/css/style.css">
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+
+        .navbar {
+            background-color: #1a2233;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .navbar a:hover {
+            color: #4dabf7;
+        }
+
+        .navbar .logout {
+            margin-left: auto;
+            color: #ff6b6b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a2233;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            display: block;
+            text-decoration: none;
+            padding: 25px 15px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .add-student    { background-color: #4dabf7; }
+        .view-students  { background-color: #38b2ac; }
+        .update-student { background-color: #f6ad55; }
+        .delete-student { background-color: #fc8181; }
+        .attendance     { background-color: #9f7aea; }
+        .view-attendance{ background-color: #667eea; }
+
+        .logout-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            text-align: center;
+            padding: 12px;
+            background-color: #e53e3e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <nav style="background:#14233d; padding:15px; margin-bottom:20px;">
-  <a href="/dashboard" style="color:white; margin-right:20px; text-decoration:none; font-weight:bold;">Dashboard</a>
-  <a href="/add-student" style="color:white; margin-right:20px; text-decoration:none;">Add Student</a>
-  <a href="/view-students" style="color:white; margin-right:20px; text-decoration:none;">View Students</a>
-  <a href="/update-student" style="color:white; margin-right:20px; text-decoration:none;">Update Student</a>
-  <a href="/delete-student" style="color:white; margin-right:20px; text-decoration:none;">Delete Student</a>
-  <a href="/logout" style="color:#ffaaaa; text-decoration:none;">Logout</a>
-</nav>
+
+<div class="navbar">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/add-student">Add Student</a>
+    <a href="/view-students">View Students</a>
+    <a href="/update-student">Update Student</a>
+    <a href="/delete-student">Delete Student</a>
+    <a href="/attendance">Attendance</a>
+    <a href="/view-attendance">View Attendance</a>
+    <a href="/logout" class="logout">Logout</a>
+</div>
 
 <div class="container">
     <h1>Student Record Management System</h1>
 
-    <div class="dashboard">
-
-        <a href="/add-student">
-            <button>Add Student</button>
-        </a>
-
-        <br><br>
-
-        <a href="/view-students">
-            <button>View Students</button>
-        </a>
-
-        <br><br>
-
-        <a href="/update-student">
-            <button>Update Student</button>
-        </a>
-
-        <br><br>
-
-        <a href="/delete-student">
-            <button>Delete Student</button>
-        </a>
-
-        <br><br>
-
-        <a href="/">
-            <button>Logout</button>
-        </a>
-
+    <div class="grid">
+        <a href="/add-student" class="card add-student">➕ Add Student</a>
+        <a href="/view-students" class="card view-students">📋 View Students</a>
+        <a href="/update-student" class="card update-student">✏️ Update Student</a>
+        <a href="/delete-student" class="card delete-student">🗑️ Delete Student</a>
+        <a href="/attendance" class="card attendance">🗓️ Attendance</a>
+        <a href="/view-attendance" class="card view-attendance">📊 View Attendance</a>
     </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
 </div>
 
 </body>

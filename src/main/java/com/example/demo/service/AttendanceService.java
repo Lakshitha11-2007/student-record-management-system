@@ -7,4 +7,5 @@ public interface AttendanceService {
     Attendance saveAttendance(Attendance attendance);
     List<Attendance> getAllAttendance();
     List<Attendance> getAttendanceByStudentId(Long studentId);
+    void deleteAttendance(Long id);
 }
