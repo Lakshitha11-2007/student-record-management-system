@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #2196F3;
+            color: white;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Attendance Records</h1>
+
+<table id="attendanceTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student ID</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted here -->
+    </tbody>
+</table>
+
+<a href="/attendance">Add New Attendance</a>
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+<script>
+    fetch("/api/attendance/all")
+        .then(response => response.json())
+        .then(data => {
+            let tbody = document.querySelector("#attendanceTable tbody");
+            data.forEach(record => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.studentId}</td>
+                    <td>${record.attendanceDate}</td>
+                    <td>${record.status}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching attendance:", error);
+        });
+</script>
+
+</body>
+</html>

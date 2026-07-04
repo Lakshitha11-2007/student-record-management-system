@@ -36,6 +36,16 @@ public class HomeController {
         return "delete-student";
     }
 
+    @GetMapping("/attendance")
+    public String attendance() {
+        return "attendance";
+    }
+
+    @GetMapping("/view-attendance")
+    public String viewAttendance() {
+        return "view-attendance";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         return "redirect:/";
