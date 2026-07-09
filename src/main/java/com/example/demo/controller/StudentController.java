@@ -22,6 +22,13 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    // Show Add Student Form
+    @GetMapping("/add-student")
+    public String showAddForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "add_student"; // your add-student form template name
+    }
+
     // Save Student
     @PostMapping("/save")
     public String saveStudent(@ModelAttribute Student student) {
@@ -41,6 +48,13 @@ public class StudentController {
     @ResponseBody
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    // Show Edit Student Form
+    @GetMapping("/edit-student")
+    public String showEditForm(@RequestParam Long studentId, Model model) {
+        model.addAttribute("student", studentService.getStudentById(studentId));
+        return "update_student"; // your edit form template name
     }
 
     // Update Student
