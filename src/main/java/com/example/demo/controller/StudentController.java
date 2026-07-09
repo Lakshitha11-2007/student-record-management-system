@@ -26,7 +26,7 @@ public class StudentController {
     @GetMapping("/add-student")
     public String showAddForm(Model model) {
         model.addAttribute("student", new Student());
-        return "add_student"; // your add-student form template name
+        return "add-student"; // your add-student form template name
     }
 
     // Save Student
